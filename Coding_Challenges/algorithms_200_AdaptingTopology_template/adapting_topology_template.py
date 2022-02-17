@@ -29,7 +29,35 @@ def n_swaps(cnot):
     """
 
     # QHACK #
-
+    wires=list(cnot.wires)
+    start_node=wires[0]
+    end_node=wires[1]
+    found=False
+    checked_nodes=set([start_node])
+    working_nodes=set(graph[start_node])
+    i=1
+    
+    if(end_node in working_nodes):
+        return(0)
+    
+    while found==False:
+        new_nodes=set()
+        print(i)
+        for node in working_nodes:
+            new_nodes.update(set(graph[node]))
+        checked_nodes.update(working_nodes)
+        
+        new_nodes=new_nodes.difference(checked_nodes)
+        print(new_nodes)
+        print(checked_nodes)
+        
+        
+        if(end_node in new_nodes):
+            found=True
+        else:
+            i+=1
+            working_nodes=new_nodes
+    return(i*2)
     # QHACK #
 
 

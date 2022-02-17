@@ -16,7 +16,10 @@ def qfunc_adder(m, wires):
     qml.QFT(wires=wires)
 
     # QHACK #
-
+    rot=m*np.pi/8
+    for i in wires:
+        
+        qml.RZ(i*rot,wires=1)
     # QHACK #
 
     qml.QFT(wires=wires).inv()
@@ -35,7 +38,7 @@ if __name__ == "__main__":
     def test_circuit():
         # Input:  |2^{N-1}>
         qml.PauliX(wires=0)
-
+        
         qfunc_adder(m, wires)
         return qml.sample()
 
